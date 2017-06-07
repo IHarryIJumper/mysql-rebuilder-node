@@ -1,0 +1,6 @@
+[33m[nodemon] 1.11.0[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching: *.*[39m
+[32m[nodemon] starting `babel-node server/index.js --presets es2015,stage-2`[39m
+[7/6/2017 @ 18:0:0] MySQL rebuilder starting...
+[7/6/2017 @ 18:0:0] Application initialized | Port: 5000
