@@ -1,17 +1,55 @@
 "use strict";
 
+import './helpers/consoleLogHelper.js';
+import close from './helpers/close.js';
+
 const localPort = 5000;
 
-console.logWithTime("MySQL rebuilder starting...");
+console.start("MySQL rebuilder starting...");
 
-import './helpers/consoleLogHelper.js'
+import express from 'express';
 
-const express = require('express');
 const app = express();
 
 app.listen(process.env.PORT || localPort);
 
-console.logWithTime("Application initialized", "| Port:", `${process.env.PORT || localPort}`);
+console.start("Application initialized", "| Port:", `${process.env.PORT || localPort}`);
 
-// console.logWithTime(`Listening on http://localhost:${process.env.PORT || 8080}`);
-// console.logWithTime(`Listening on http://localhost:${process.env.PORT || 8080}`);
+import migrateConnection from './mysql/databases.js';
+import migration from './migration/migration.js';
+
+migrateConnection.start().then((resolve, reject) => {
+	if (Array.isArray(resolve) && reject === undefined) {
+		let error = false;
+
+		resolve.every((connection, connectionIndex) => {
+			if (connection !== true) {
+				error = true;
+			}
+
+			return !error;
+		});
+
+		if (error) {
+			console.error('Database connections resolve failed');
+			close();
+		} else {
+			console.step("All connections were opened");
+			migration.startMigration().then((reslve, reject) => {
+				if (reject) {
+					console.error('Migration failed');
+				}
+				/*console.step('Migration complete!');
+				close();*/
+			});
+		}
+
+	} else {
+		console.error('Database connections failed');
+		close();
+	}
+
+	/*migrateConnection.closeAllConnections().then((resolve, reject) => {
+		console.step("All connections were closed");
+	});*/
+});

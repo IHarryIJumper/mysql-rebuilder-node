@@ -2,5 +2,21 @@
 [33m[nodemon] to restart at any time, enter `rs`[39m
 [33m[nodemon] watching: *.*[39m
 [32m[nodemon] starting `babel-node server/index.js --presets es2015,stage-2`[39m
-[7/6/2017 @ 18:0:0] MySQL rebuilder starting...
-[7/6/2017 @ 18:0:0] Application initialized | Port: 5000
+[9/6/2017 @ 13:29:16] MySQL rebuilder starting...
+[9/6/2017 @ 13:29:16] Application initialized | Port: 5000
+[9/6/2017 @ 13:29:16] Initial connection to database impressive-slideshow-prod is established as ID 118
+[9/6/2017 @ 13:29:16] Target connection to database impressive-slideshow-new is established as ID 119
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `babel-node server/index.js --presets es2015,stage-2`[39m
+[9/6/2017 @ 13:29:19] MySQL rebuilder starting...
+[9/6/2017 @ 13:29:19] Application initialized | Port: 5000
+[9/6/2017 @ 13:29:19] Initial connection to database impressive-slideshow-prod is established as ID 120
+[9/6/2017 @ 13:29:19] Target connection to database impressive-slideshow-new is established as ID 121
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `babel-node server/index.js --presets es2015,stage-2`[39m
+[9/6/2017 @ 13:29:52] MySQL rebuilder starting...
+[9/6/2017 @ 13:29:52] Application initialized | Port: 5000
+[9/6/2017 @ 13:29:52] Initial connection to database impressive-slideshow-prod is established as ID 122
+[9/6/2017 @ 13:29:52] Target connection to database impressive-slideshow-new is established as ID 123
+[9/6/2017 @ 13:29:52] Initial connection closed
+[9/6/2017 @ 13:29:52] Target connection closed
