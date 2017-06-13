@@ -17,7 +17,7 @@ const timer = setInterval(function () {
 }, 10);*/
 
 export const initProgress = (maxValue) => {
-	bar = new ProgressBar('  Migration [:bar] :rate/bps :percent :etas', {
+	bar = new ProgressBar('  Migration [:bar] :rate/ops :percent :etas', {
 		complete: '=',
 		incomplete: ' ',
 		width: 50,
