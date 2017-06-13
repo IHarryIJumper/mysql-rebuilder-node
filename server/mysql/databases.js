@@ -12,6 +12,7 @@ const initialDatabase = {
 		user: 'andrey',
 		password: 'root',
 		database: 'impressive-slideshow-prod'
+		// database: 'impressive-slideshow-test'
 	},
 	targetDatabase = {
 		host: 'localhost',
@@ -89,8 +90,13 @@ export const targetQuery = (query, variable) => {
 				throw error;
 			};
 			// console.logPrototype(results[0].solution);
-			console.step('Target query result: ', results[0][variable]);
-			resolve(results[0][variable]);
+			// console.step('Target query result: ', results[0][variable]);
+			// resolve(results[0][variable]);
+			if (variable !== undefined) {
+				resolve(results[0][variable]);
+			} else {
+				resolve(results);
+			}
 		});
 	});
 };
@@ -99,7 +105,7 @@ export const closeInitialConnection = () => {
 	return new Promise((resolve, reject) => {
 		initialConnection.end((err) => {
 			if (err) {
-				console.error('Close initial connaction error.', 'Error:', hightlight(err));
+				console.warn('Close initial connaction error.', 'Error:', hightlight(err));
 			};
 			console.info('Initial connection closed');
 			resolve(true);
@@ -112,7 +118,7 @@ export const closeTargetConnection = () => {
 	return new Promise((resolve, reject) => {
 		targetConnection.end((err) => {
 			if (err) {
-				console.error('Close target connaction error.', 'Error:', hightlight(err));
+				console.warn('Close target connaction error.', 'Error:', hightlight(err));
 			};
 			console.info('Target connection closed');
 			resolve(true);

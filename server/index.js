@@ -35,12 +35,17 @@ migrateConnection.start().then((resolve, reject) => {
 			close();
 		} else {
 			console.step("All connections were opened");
-			migration.startMigration().then((reslve, reject) => {
+			migration.startMigration().then((resolve, reject) => {
 				if (reject) {
 					console.error('Migration failed');
 				}
-				/*console.step('Migration complete!');
-				close();*/
+				console.step('Migration completed!');
+				migrateConnection.closeAllConnections().then((closeConnectionResolve, closeConnectionReject) => {
+					if(closeConnectionReject) {
+						console.warn('Close database connections failed');
+					}
+					close();
+				});
 			});
 		}
 

@@ -47,12 +47,17 @@ _databases2.default.start().then(function (resolve, reject) {
 			(0, _close2.default)();
 		} else {
 			console.step("All connections were opened");
-			_migration2.default.startMigration().then(function (reslve, reject) {
+			_migration2.default.startMigration().then(function (resolve, reject) {
 				if (reject) {
 					console.error('Migration failed');
 				}
-				/*console.step('Migration complete!');
-    close();*/
+				console.step('Migration completed!');
+				_databases2.default.closeAllConnections().then(function (closeConnectionResolve, closeConnectionReject) {
+					if (closeConnectionReject) {
+						console.error('Close database connections failed');
+					}
+					(0, _close2.default)();
+				});
 			});
 		}
 	} else {

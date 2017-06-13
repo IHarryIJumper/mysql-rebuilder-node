@@ -39,7 +39,7 @@ var initProgress = exports.initProgress = function initProgress(maxValue) {
 var progressTick = exports.progressTick = function progressTick() {
 	bar.tick();
 	if (bar.complete) {
-		console.step('Progress completed');
+		console.info('Done.');
 	}
 };
 

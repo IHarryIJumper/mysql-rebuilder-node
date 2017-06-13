@@ -28,7 +28,7 @@ export const initProgress = (maxValue) => {
 export const progressTick = () => {
 	bar.tick();
 	if (bar.complete) {
-		console.step('Progress completed');
+		console.info('Done.');
 	}
 };
 

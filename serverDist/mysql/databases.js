@@ -27,6 +27,7 @@ var initialDatabase = {
 	user: 'andrey',
 	password: 'root',
 	database: 'impressive-slideshow-prod'
+	// database: 'impressive-slideshow-test'
 },
     targetDatabase = {
 	host: 'localhost',
@@ -104,8 +105,13 @@ var targetQuery = exports.targetQuery = function targetQuery(query, variable) {
 				throw error;
 			};
 			// console.logPrototype(results[0].solution);
-			console.step('Target query result: ', results[0][variable]);
-			resolve(results[0][variable]);
+			// console.step('Target query result: ', results[0][variable]);
+			// resolve(results[0][variable]);
+			if (variable !== undefined) {
+				resolve(results[0][variable]);
+			} else {
+				resolve(results);
+			}
 		});
 	});
 };
