@@ -20,6 +20,8 @@ var _databases = require('../mysql/databases.js');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var remoteMigration = false;
+
 var settingsLength = 0,
     debugLength = 500,
     debug = false,
@@ -178,7 +180,34 @@ var migrationProgress = function migrationProgress() {
 				iteration(resolve);
 				// console.info("Iteration:", migrationStage, 'out of', settingsLength);
 			} else if (iterationResolve === 'stop') {
-				resolve('finished');
+
+				if (remoteMigration === true && !debug) {
+
+					getInitialDatabaseLength().then(function (getResolve, getReject) {
+						if (getReject) {
+							reject('failed');
+							return;
+						}
+
+						if (parseInt(getResolve) > settingsLength) {
+							_progress2.default.initProgress((parseInt(getResolve) - settingsLength) * 3);
+						}
+
+						settingsLength = parseInt(getResolve);
+
+						if (debug && settingsLength > debugLength) {
+							settingsLength = debugLength;
+						}
+
+						console.log('Settings additional migration length:', settingsLength);
+
+						migrationProgress().then(function (progressResolve, progressReject) {
+							resolve('finished');
+						});
+					});
+				} else {
+					resolve('finished');
+				}
 			}
 		});
 	};

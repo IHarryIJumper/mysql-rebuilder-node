@@ -28,7 +28,7 @@ const timer = setInterval(function () {
 }, 10);*/
 
 var initProgress = exports.initProgress = function initProgress(maxValue) {
-	bar = new _progress2.default('  Migration [:bar] :rate/bps :percent :etas', {
+	bar = new _progress2.default('  Migration [:bar] :rate/ops :percent :etas', {
 		complete: '=',
 		incomplete: ' ',
 		width: 50,

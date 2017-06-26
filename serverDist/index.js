@@ -54,7 +54,7 @@ _databases2.default.start().then(function (resolve, reject) {
 				console.step('Migration completed!');
 				_databases2.default.closeAllConnections().then(function (closeConnectionResolve, closeConnectionReject) {
 					if (closeConnectionReject) {
-						console.error('Close database connections failed');
+						console.warn('Close database connections failed');
 					}
 					(0, _close2.default)();
 				});

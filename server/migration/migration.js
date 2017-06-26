@@ -7,6 +7,8 @@ import {
 	targetQuery
 } from '../mysql/databases.js';
 
+const remoteMigration = false;
+
 let settingsLength = 0,
 	debugLength = 500,
 	debug = false,
@@ -167,7 +169,34 @@ const migrationProgress = () => {
 				iteration(resolve);
 				// console.info("Iteration:", migrationStage, 'out of', settingsLength);
 			} else if (iterationResolve === 'stop') {
-				resolve('finished');
+				
+				if (remoteMigration === true && !debug) {
+					
+					getInitialDatabaseLength().then((getResolve, getReject) => {
+						if (getReject) {
+							reject('failed');
+							return;
+						}
+
+						if (parseInt(getResolve) > settingsLength) {
+							progress.initProgress((parseInt(getResolve) - settingsLength) * 3);
+						}
+
+						settingsLength = parseInt(getResolve);
+						
+						if (debug && settingsLength > debugLength) {
+							settingsLength = debugLength;
+						}
+
+						console.log('Settings additional migration length:', settingsLength);
+
+						migrationProgress().then((progressResolve, progressReject) => {
+							resolve('finished');
+						});
+					});
+				} else {
+					resolve('finished');
+				}
 			}
 		});
 	};

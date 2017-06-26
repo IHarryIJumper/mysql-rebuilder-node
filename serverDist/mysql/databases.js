@@ -120,7 +120,7 @@ var closeInitialConnection = exports.closeInitialConnection = function closeInit
 	return new _bluebird2.default(function (resolve, reject) {
 		initialConnection.end(function (err) {
 			if (err) {
-				console.error('Close initial connaction error.', 'Error:', hightlight(err));
+				console.warn('Close initial connaction error.', 'Error:', hightlight(err));
 			};
 			console.info('Initial connection closed');
 			resolve(true);
@@ -132,7 +132,7 @@ var closeTargetConnection = exports.closeTargetConnection = function closeTarget
 	return new _bluebird2.default(function (resolve, reject) {
 		targetConnection.end(function (err) {
 			if (err) {
-				console.error('Close target connaction error.', 'Error:', hightlight(err));
+				console.warn('Close target connaction error.', 'Error:', hightlight(err));
 			};
 			console.info('Target connection closed');
 			resolve(true);
